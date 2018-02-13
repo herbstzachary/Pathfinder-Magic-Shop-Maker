@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 enum Settlement{
 	THORP, HAMLET, VILLAGE, SMALLTOWN, LARGETOWN, SMALLCITY, LARGECTIY, METROPOLIS
 }
@@ -7,6 +9,7 @@ public class ShopGenerator {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
+		Settlement[] settlementArray = Settlement.values();
 		// Ask for Settlement type from list
 		// 1. Thorp
 		// 2. Hamlet
@@ -17,17 +20,25 @@ public class ShopGenerator {
 		// 7. Large City
 		// 8. Metropolis
 		
-		System.out.println("Please select a settlement type: \n"
-				+ Settlement.valueOf("THORP") + ". Thorp \n"
-				+ Settlement.valueOf("HAMLET") + ". Hamlet \n"
-				+ Settlement.valueOf("VILLAGE") + ". Village \n"
-				+ Settlement.valueOf("SMALLTOWN") + ". Small Town \n"
-				+ Settlement.valueOf("LARGETOWN") + ". Large Town \n"
-				+ Settlement.valueOf("SMALLCITY") + ". Small City \n"
+        Scanner in = new Scanner(System.in);
+        int settlementSelect = -1;
+		do {
+			System.out.println("Please select a settlement type (number):");
+			int i = 0; //counter for output of settlements, input from user later
+			for (Settlement settlement : settlementArray) {
+				System.out.println( i + ". " + settlement);
+				i++;
+			}
+			
+			settlementSelect = in.nextInt();
+			if (settlementSelect >= settlementArray.length || settlementSelect < 0) {
+				System.out.println("Please select a valid settlement number.");
+			}
 
-				);
-		
-		
+		}while(settlementSelect >= settlementArray.length || settlementSelect < 0);
+		        
+        Settlement settlementType = settlementArray[settlementSelect];
+        
 		// Determine how many Minor, Medium, Major items (rand() based on settlement)
 		
 		// Determine what items are available (Random Magic Item Generation Table)
@@ -37,5 +48,4 @@ public class ShopGenerator {
 		// Import NPC from NPC Creator (TBD)
 		
 	}
-
 }
