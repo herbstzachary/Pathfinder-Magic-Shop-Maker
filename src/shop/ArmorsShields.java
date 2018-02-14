@@ -1,3 +1,4 @@
+package shop;
 import java.util.Map;
 
 public class ArmorsShields {
