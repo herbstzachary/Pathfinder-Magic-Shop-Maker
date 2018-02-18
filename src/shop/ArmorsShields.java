@@ -1,19 +1,20 @@
 package shop;
 import java.util.Map;
+import java.util.Random;
 
 public class ArmorsShields {
 	
-	private class Armor{
+	public class Equipment{
 		public String name;
 		public int cost; //in gp
-		//search for shield in name
+		private int totalEchantmentBonus = 0;// use this to determine cost of enchantments
 		
-		Armor(String name, int cost){
+		Equipment(String name, int cost){
 			this.name = name;
 			this.cost = cost;
 		}
 	}
-	
+
 	private class Enchantment{
 		public String name;
 		public int bonus;
@@ -26,20 +27,30 @@ public class ArmorsShields {
 		}
 	}
 	
+	public Equipment armorShield;
+	
 	//Lists of items, use rand(1,100) % arraySize
 	
-   Armor[] baseArmorList = new Armor[] {
-		   new Armor("Leather", 10),
-		   new Armor("Hide shirt", 20),
-		   new Armor("Studded Leather", 25)
-   };
+	private Equipment[] baseArmorList = new Equipment[] {
+		   new Equipment("Leather", 10),
+		   new Equipment("Hide shirt", 20),
+		   new Equipment("Studded Leather", 25)
+	};
    
-   Armor[] baseShieldList = new Armor[] {
-		   new Armor("Light Steel Shield", 9),
-		   new Armor("Heavy Steel Shield", 20)
-   };
+	private Equipment[] baseShieldList = new Equipment[] {
+		   new Equipment("Light Steel Shield", 9),
+		   new Equipment("Heavy Steel Shield", 20)
+	};
 	
-   Enchantment[] armorEnchantmentsLevel1 = new Enchantment[] {
+	private Enchantment[] baseEnchantments = new Enchantment[] {
+			new Enchantment("+1", 1, 0),
+			new Enchantment("+2", 2, 0),
+			new Enchantment("+3", 3, 0),
+			new Enchantment("+4", 4, 0),
+			new Enchantment("+5", 5, 0)
+	};
+	
+	private Enchantment[] armorEnchantmentsLevel1 = new Enchantment[] {
 		   new Enchantment("Benevolent", 1, 2000),
 		   new Enchantment("Poison-resistant", 1, 2250),
 		   new Enchantment("Balanced", 1, 0),
@@ -57,9 +68,9 @@ public class ArmorsShields {
 		   new Enchantment("Spell Storing", 1, 0),
 		   new Enchantment("Stanching", 1, 0),
 		   new Enchantment("Warding", 1, 0),
-   };
+	};
    
-   Enchantment[] armorEnchantmentsLevel2 = new Enchantment[] {
+	private Enchantment[] armorEnchantmentsLevel2 = new Enchantment[] {
 		   new Enchantment("Glamered", 2, 2700),
 		   new Enchantment("Jousting", 2, 3750),
 		   new Enchantment("Shadow", 2, 3750),
@@ -68,9 +79,9 @@ public class ArmorsShields {
 		   new Enchantment("Creeping", 2, 5000),
 		   new Enchantment("Rallying", 2, 5000),
 		   new Enchantment("Spell Resistance (13)", 2, 0)
-   };
+	};
    
-   Enchantment[] armorEnchantmentsLevel3 = new Enchantment[] {
+	private Enchantment[] armorEnchantmentsLevel3 = new Enchantment[] {
 		   new Enchantment("Adhesive", 3, 7000),
 		   new Enchantment("Hosteling", 3, 7500),
 		   new Enchantment("Radiant", 3, 7500),
@@ -82,18 +93,18 @@ public class ArmorsShields {
 		   new Enchantment("Spell Resistance (15)", 3, 0),
 		   new Enchantment("Titanic", 3, 0),
 		   new Enchantment("Wild", 3, 0)
-   };
+	};
    
-   Enchantment[] armorEnchantmentsLevel4 = new Enchantment[] {
+	private Enchantment[] armorEnchantmentsLevel4 = new Enchantment[] {
 		   new Enchantment("Harmonizing", 4, 15000),
 		   new Enchantment("Improved Shadow", 4, 15000),
 		   new Enchantment("Improved Slick", 4, 15000),
 		   new Enchantment("Energy Resistance", 4, 18000),
 		   new Enchantment("Martyring", 4, 18000),
 		   new Enchantment("Spell Resistance (17)", 4, 0)
-   };
+	};
  
-   Enchantment[] armorEnchantmentsLevel5 = new Enchantment[] {
+	private Enchantment[] armorEnchantmentsLevel5 = new Enchantment[] {
 		   new Enchantment("Righteous", 5, 27000),
 		   new Enchantment("Unbound", 5, 27000),
 		   new Enchantment("Unrighteous", 5, 27000),
@@ -106,68 +117,68 @@ public class ArmorsShields {
 		   new Enchantment("Greater Energy Resistance", 5, 66000),
 		   new Enchantment("Fortification (heavy)", 5, 0),
 		   new Enchantment("Spell Resistance (19)", 5, 0)
-   };
+	};
    
-   Armor[] lesserMinorSpecificMagicArmor = new Armor[] {
-		   new Armor("Mithral Shirt", 1100)
+	private Equipment[] lesserMinorSpecificMagicArmor = new Equipment[] {
+		   new Equipment("Mithral Shirt", 1100)
 		   
 		   //Masterwork? special quality?
-   };
+	};
    
-   Armor[] greaterMinorSpecificMagicArmor = new Armor[] {
-		   new Armor("Mistmail", 2250),
-		   new Armor("Otyugh Hide", 2565),
-		   new Armor("Dragonhide Plate", 3300)
-   };
+	private Equipment[] greaterMinorSpecificMagicArmor = new Equipment[] {
+		   new Equipment("Mistmail", 2250),
+		   new Equipment("Otyugh Hide", 2565),
+		   new Equipment("Dragonhide Plate", 3300)
+	};
    
-   Armor[] lesserMediumSpecificMagicArmor = new Armor[] {
-		   new Armor("Elven Chain", 5150),
-		   new Armor("Rhino Hide", 5165),
-		   new Armor("Morlock Hide", 8910)
-   };
+	private Equipment[] lesserMediumSpecificMagicArmor = new Equipment[] {
+		   new Equipment("Elven Chain", 5150),
+		   new Equipment("Rhino Hide", 5165),
+		   new Equipment("Morlock Hide", 8910)
+	};
    
-   Armor[] greaterMediumSpecificMagicArmor = new Armor[] {
-		   new Armor("Adamantine Breastplate", 10200),
-		   new Armor("Soothsayer's Raiment", 10300),
-		   new Armor("Equestrian Plate", 10650),
-		   new Armor("Enchanted Eelskin", 11160),
-		   new Armor("Boneless Leather", 12160),
-		   new Armor("Murderer's Blackcloth", 12405),
-		   new Armor("Folding Plate", 12650),
-		   new Armor("Breastplate of Vanishing", 15200)
-   };
+	private Equipment[] greaterMediumSpecificMagicArmor = new Equipment[] {
+		   new Equipment("Adamantine Breastplate", 10200),
+		   new Equipment("Soothsayer's Raiment", 10300),
+		   new Equipment("Equestrian Plate", 10650),
+		   new Equipment("Enchanted Eelskin", 11160),
+		   new Equipment("Boneless Leather", 12160),
+		   new Equipment("Murderer's Blackcloth", 12405),
+		   new Equipment("Folding Plate", 12650),
+		   new Equipment("Breastplate of Vanishing", 15200)
+	};
    
-   Armor[] lesserMajorSpecificMagicArmor = new Armor[] {
-		   new Armor("Armor of Insults", 16175),
-		   new Armor("Dwarven Plate", 16500),
-		   new Armor("Banded Mail of Luck", 18900),
-		   new Armor("Catskin Leather", 18910),
-		   new Armor("Celestial Armor", 22400),
-		   new Armor("Buccaneer's Breastplate", 23850),
-		   new Armor("Plate Armor of the Deep", 24650)
-   };
+	private Equipment[] lesserMajorSpecificMagicArmor = new Equipment[] {
+		   new Equipment("Equipment of Insults", 16175),
+		   new Equipment("Dwarven Plate", 16500),
+		   new Equipment("Banded Mail of Luck", 18900),
+		   new Equipment("Catskin Leather", 18910),
+		   new Equipment("Celestial Equipment", 22400),
+		   new Equipment("Buccaneer's Breastplate", 23850),
+		   new Equipment("Plate Equipment of the Deep", 24650)
+	};
    
-   Armor[] greaterMajorSpecificMagicArmor = new Armor[] {
-		   new Armor("Breastplate of Command", 25400),
-		   new Armor("Forsaken Banded Mail", 25400),
-		   new Armor("Mithral Full Plate of Speed", 26500),
-		   new Armor("Warden of the Woods", 29350),
-		   new Armor("Scarab Breastplate", 32350),
-		   new Armor("Giant-Hide Armor (Ogre)", 39165),
-		   new Armor("Hamatula Hide", 44215),
-		   new Armor("Giant-Hide Armor (Hill Giant)", 46665),
-		   new Armor("Demon Armor", 52260),
-		   new Armor("Giant-Hide Armor (Stone, Fire, or Frost Giant)", 54165),
-		   new Armor("Giant-Hide Armor (Troll)", 59165),
-		   new Armor("Mail of Malevolence", 61300),
-		   new Armor("Giant-Hide Armor (Cloud Giant)", 69165),
-		   new Armor("Giant-Hide Armor (Storm Giant)", 76665),
-		   new Armor("Daystar Half-Plate", 81250),
-		   new Armor("Invincible Armor", 137650),
-		   new Armor("Prismatic Plate", 160650)				   
-   };
+	private Equipment[] greaterMajorSpecificMagicArmor = new Equipment[] {
+		   new Equipment("Breastplate of Command", 25400),
+		   new Equipment("Forsaken Banded Mail", 25400),
+		   new Equipment("Mithral Full Plate of Speed", 26500),
+		   new Equipment("Warden of the Woods", 29350),
+		   new Equipment("Scarab Breastplate", 32350),
+		   new Equipment("Giant-Hide Equipment (Ogre)", 39165),
+		   new Equipment("Hamatula Hide", 44215),
+		   new Equipment("Giant-Hide Equipment (Hill Giant)", 46665),
+		   new Equipment("Demon Equipment", 52260),
+		   new Equipment("Giant-Hide Equipment (Stone, Fire, or Frost Giant)", 54165),
+		   new Equipment("Giant-Hide Equipment (Troll)", 59165),
+		   new Equipment("Mail of Malevolence", 61300),
+		   new Equipment("Giant-Hide Equipment (Cloud Giant)", 69165),
+		   new Equipment("Giant-Hide Equipment (Storm Giant)", 76665),
+		   new Equipment("Daystar Half-Plate", 81250),
+		   new Equipment("Invincible Equipment", 137650),
+		   new Equipment("Prismatic Plate", 160650)				   
+	};
 
-   Enchantment[] shieldEnchantmentsLevel1 = new Enchantment[] {
+	private Enchantment[] shieldEnchantmentsLevel1 = new Enchantment[] {
 		   new Enchantment("Poison-resistant", 1, 2250),
 		   new Enchantment("Arrow Catching", 1, 0),
 		   new Enchantment("Bashing", 1, 0),
@@ -179,32 +190,32 @@ public class ArmorsShields {
 		   new Enchantment("Impervious", 1, 0),
 		   new Enchantment("Mirrored", 1, 0),
 		   new Enchantment("Ramming", 1, 0)
-   };
+	};
    
-   Enchantment[] shieldEnchantmentLevel2 = new Enchantment[]{
+	private Enchantment[] shieldEnchantmentLevel2 = new Enchantment[]{
 		   new Enchantment("Rallying", 2, 5000),
 		   new Enchantment("Wyrmsbreath", 2, 5000),
 		   new Enchantment("Animated", 2, 0),
 		   new Enchantment("Arrow Deflection", 2, 0),
 		   new Enchantment("Merging", 2, 0),
 		   new Enchantment("Spell Resistance (13)", 2, 0)
-   };
+	};
    
-   Enchantment[] shieldEnchantmentLevel3 = new Enchantment[]{
+	private Enchantment[] shieldEnchantmentLevel3 = new Enchantment[]{
 		   new Enchantment("Hosteling", 3, 7500),
 		   new Enchantment("Radiant", 3, 7500),
 		   new Enchantment("Fortification (moderate)", 3, 0),
 		   new Enchantment("Ghost Touch", 3, 0),
 		   new Enchantment("Spell Resistance (15)", 3, 0),
 		   new Enchantment("Wild", 3, 0)
-   };
+	};
    
-   Enchantment[] shieldEnchantmentLevel4 = new Enchantment[]{
+	private Enchantment[] shieldEnchantmentLevel4 = new Enchantment[]{
 		   new Enchantment("Energy Resistance", 4, 18000),
 		   new Enchantment("Spell Resistance (17)", 4, 0)
-   };
+	};
    
-   Enchantment[] shieldEnchantmentLevel5 = new Enchantment[]{
+	private Enchantment[] shieldEnchantmentLevel5 = new Enchantment[]{
 		   new Enchantment("Determination", 5, 30000),
 		   new Enchantment("Improved Energy Resistance", 5, 42000),
 		   new Enchantment("Undead Controlling", 5, 49000),
@@ -212,55 +223,116 @@ public class ArmorsShields {
 		   new Enchantment("Fortification (heavy)", 5, 0),
 		   new Enchantment("Reflecting", 5, 0),
 		   new Enchantment("Spell Resistance (19)", 5, 0)
-   };
+	};
    
-   Armor[] lesserMinorSpecificMagicShields = new Armor[] {
-		   new Armor("Living Steel Heavy Shield", 120),
-		   new Armor("Darkwood Buckler", 203),
-		   new Armor("Darkwood Shield", 257),
-		   new Armor("Mithral Heavy Shield", 1020)
-   };
+	private Equipment[] lesserMinorSpecificMagicShields = new Equipment[] {
+		   new Equipment("Living Steel Heavy Shield", 120),
+		   new Equipment("Darkwood Buckler", 203),
+		   new Equipment("Darkwood Shield", 257),
+		   new Equipment("Mithral Heavy Shield", 1020)
+	};
    
-   Armor[] greaterMinorSpecificMagicShields = new Armor[] {
-		   new Armor("Zombie Skin Shield", 2159),
-		   new Armor("Caster's Shield", 3153),
-		   new Armor("Burglar's Buckler", 4655)
-   };
+	private Equipment[] greaterMinorSpecificMagicShields = new Equipment[] {
+		   new Equipment("Zombie Skin Shield", 2159),
+		   new Equipment("Caster's Shield", 3153),
+		   new Equipment("Burglar's Buckler", 4655)
+	};
    
-   Armor[] lesserMediumSpecificMagicShields = new Armor[] {
-		   new Armor("Spined Shield", 5580),
-		   new Armor("Dragonslayer's Shield", 7170),
-		   new Armor("Collapsible Tower", 8170),
-		   new Armor("Lion's Shield", 9170)
-   };
+	private Equipment[] lesserMediumSpecificMagicShields = new Equipment[] {
+		   new Equipment("Spined Shield", 5580),
+		   new Equipment("Dragonslayer's Shield", 7170),
+		   new Equipment("Collapsible Tower", 8170),
+		   new Equipment("Lion's Shield", 9170)
+	};
    
-   Armor[] greaterMediumSpecificMagicShields = new Armor[] {
-		   new Armor("Greater Caster's Shield", 10153),
-		   new Armor("Celestial Shield", 13170),
-		   new Armor("Maelstrom Shield", 14170),
-		   new Armor("Volcanic Shield", 14170),
-		   new Armor("Tempest Shield", 15170)
-   };
+	private Equipment[] greaterMediumSpecificMagicShields = new Equipment[] {
+		   new Equipment("Greater Caster's Shield", 10153),
+		   new Equipment("Celestial Shield", 13170),
+		   new Equipment("Maelstrom Shield", 14170),
+		   new Equipment("Volcanic Shield", 14170),
+		   new Equipment("Tempest Shield", 15170)
+	};
    
-   Armor[] lesserMajorSpecificMagicShields = new Armor[] {
-		   new Armor("Battlement Shield", 16180),
-		   new Armor("Winged Shield", 17257),
-		   new Armor("Avalanche Shield", 19170),
-		   new Armor("Fortress Shield", 19180),
-		   new Armor("Wyrmslayer's Shield", 20170)
-   };
+	private Equipment[] lesserMajorSpecificMagicShields = new Equipment[] {
+		   new Equipment("Battlement Shield", 16180),
+		   new Equipment("Winged Shield", 17257),
+		   new Equipment("Avalanche Shield", 19170),
+		   new Equipment("Fortress Shield", 19180),
+		   new Equipment("Wyrmslayer's Shield", 20170)
+	};
    
-   Armor[] greaterMajorSpecificMagicShields = new Armor[] {
-		   new Armor("Spell Ward Tower Shield", 25810),
-		   new Armor("Quick Block Buckler", 36155),
-		   new Armor("Belligerent Shield", 36170),
-		   new Armor("Force Tower", 46030),
-		   new Armor("Absorbing Shield", 50170),
-		   new Armor("Elysian Shield", 52620)
-   };
+	private Equipment[] greaterMajorSpecificMagicShields = new Equipment[] {
+		   new Equipment("Spell Ward Tower Shield", 25810),
+		   new Equipment("Quick Block Buckler", 36155),
+		   new Equipment("Belligerent Shield", 36170),
+		   new Equipment("Force Tower", 46030),
+		   new Equipment("Absorbing Shield", 50170),
+		   new Equipment("Elysian Shield", 52620)
+	};
    
-   // add costs (bonus cost is (bonus * 1k)^2)
-	
+	public ArmorsShields(Rarity type) {
+		
+	   Random randGenerator = new Random();
+	   int d;
+	   
+	   boolean isShield = false;
+	   if (randGenerator.nextInt(2) == 0) {
+		   isShield = true;
+	   }
+	   
+		// add costs (bonus cost is (bonus * 1k)^2)
+	   if (type == Rarity.MINOR) {
+//		   if (randGenerator.nextInt(2) == 0) {
+//			   //Lesser
+//			   d = randGenerator.nextInt(100) + 1;
+//			   if (d <= 80) {
+				   //+1 Equipment
+//				   if (isShield){
+					   armorShield = baseShieldList[randGenerator.nextInt(baseShieldList.length)];
+					   armorShield.name = baseEnchantments[0].name + " " + armorShield.name;
+					   armorShield.totalEchantmentBonus =  baseEnchantments[0].bonus;
+					   armorShield.cost += Math.pow(armorShield.totalEchantmentBonus, 2) * 1000;
+//				   }
+				   
+//			   }
+//			   else {
+//				   //lesser minor specific
+//			   }
+//		   }
+//		   else {
+//			   //Greater
+//			   d = randGenerator.nextInt(100) + 1;
+//			   if (d <= 26) {
+//				   //+1
+//			   }
+//			   else if (d <= 53) {
+//				   //+2
+//			   }
+//			   else if (d <= 80) {
+//				   //+1 with +1 ability
+//			   }
+//			   else {
+//				   //greater minor
+//			   }
+//		   }
+	   }
+	   else if (type == Rarity.MEDIUM) {
+		   if (randGenerator.nextInt(2) == 0) {
+			   //Lesser 
+		   }
+		   else {
+			   //Greater
+		   }
+	   }
+	   else if (type == Rarity.MAJOR) {
+		   if (randGenerator.nextInt(2) == 0) {
+			   //Lesser 
+		   }
+		   else {
+			   //Greater
+		   }
+	   }
+	}	
 }
 
 

@@ -8,6 +8,10 @@ enum Settlement{
 	THORP, HAMLET, VILLAGE, SMALLTOWN, LARGETOWN, SMALLCITY, LARGECTIY, METROPOLIS
 }
 
+enum Rarity{
+	MINOR, MEDIUM, MAJOR
+}
+
 public class ShopGenerator {
 
 	public static void main(String[] args) {
@@ -90,6 +94,9 @@ public class ShopGenerator {
 		ArmorsShields[] majorItems = new ArmorsShields[numMajorItems];
 
 		// Create specific items based on which items are going to be available
+		ArmorsShields test = new ArmorsShields(Rarity.MINOR);
+		System.out.println(test.armorShield.name);
+		System.out.println(test.armorShield.cost);
 		
 		// Import NPC from NPC Creator (TBD)
 		
