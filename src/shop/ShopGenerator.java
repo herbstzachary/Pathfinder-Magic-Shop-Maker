@@ -85,7 +85,7 @@ public class ShopGenerator {
 			numMajorItems = (randGenerator.nextInt(4) + 1) + (randGenerator.nextInt(4) + 1) + (randGenerator.nextInt(4) + 1);
 		}
 		
-		System.out.println("Your shop has " + numMinorItems + " minor items, " + numMediumItems + " numMediumItems, " + numMajorItems + " major items.");
+		System.out.println("Your shop has " + numMinorItems + " minor items, " + numMediumItems + " medium items, " + numMajorItems + " major items.");
 		
 		// Determine what items are available (Random Magic Item Generation Table)
 		// Create generic object type that all equipment can inherit from
@@ -94,9 +94,11 @@ public class ShopGenerator {
 		ArmorsShields[] majorItems = new ArmorsShields[numMajorItems];
 
 		// Create specific items based on which items are going to be available
-		ArmorsShields test = new ArmorsShields(Rarity.MINOR);
-		System.out.println(test.armorShield.name);
-		System.out.println(test.armorShield.cost);
+		for (int i = 0; i < numMinorItems; i++) {
+			ArmorsShields test = new ArmorsShields(Rarity.MINOR);
+			System.out.println("Name: " + test.armorShield.name);
+			System.out.println("Cost: " + test.armorShield.cost);
+		}
 		
 		// Import NPC from NPC Creator (TBD)
 		

@@ -4,6 +4,8 @@ import java.util.Random;
 
 public class ArmorsShields {
 	
+	public Equipment armorShield;
+	
 	public class Equipment{
 		public String name;
 		public int cost; //in gp
@@ -26,20 +28,31 @@ public class ArmorsShields {
 			this.additionalCost = cost;
 		}
 	}
-	
-	public Equipment armorShield;
-	
+		
 	//Lists of items, use rand(1,100) % arraySize
 	
 	private Equipment[] baseArmorList = new Equipment[] {
+		   new Equipment("Padded", 5),
 		   new Equipment("Leather", 10),
-		   new Equipment("Hide shirt", 20),
-		   new Equipment("Studded Leather", 25)
+		   new Equipment("Studded Leather", 25),
+		   new Equipment("Chain Shirt", 20),
+		   new Equipment("Hide", 15),
+		   new Equipment("Scale Mail", 50),
+		   new Equipment("Breastplate", 200),
+		   new Equipment("Chainmail", 150),
+		   new Equipment("Banded Mail", 250),
+		   new Equipment("Splint Mail", 200),
+		   new Equipment("Half-Plate", 600),
+		   new Equipment("Full Plate", 1500)
 	};
    
 	private Equipment[] baseShieldList = new Equipment[] {
+		   new Equipment("Buckler", 5),
 		   new Equipment("Light Steel Shield", 9),
-		   new Equipment("Heavy Steel Shield", 20)
+		   new Equipment("Light Wooden Shield", 3),
+		   new Equipment("Heavy Steel Shield", 20),
+		   new Equipment("Heavy Wooden Shield", 7),
+		   new Equipment("Tower Shield", 30)
 	};
 	
 	private Enchantment[] baseEnchantments = new Enchantment[] {
@@ -278,43 +291,56 @@ public class ArmorsShields {
 	   boolean isShield = false;
 	   if (randGenerator.nextInt(2) == 0) {
 		   isShield = true;
+		   armorShield = baseShieldList[randGenerator.nextInt(baseShieldList.length)];
+	   }
+	   else {
+		   armorShield = baseArmorList[randGenerator.nextInt(baseArmorList.length)];
 	   }
 	   
 		// add costs (bonus cost is (bonus * 1k)^2)
 	   if (type == Rarity.MINOR) {
-//		   if (randGenerator.nextInt(2) == 0) {
-//			   //Lesser
-//			   d = randGenerator.nextInt(100) + 1;
-//			   if (d <= 80) {
+		   if (randGenerator.nextInt(2) == 0) {
+			   //Lesser
+			   d = randGenerator.nextInt(100) + 1;
+			   if (d <= 80) {
 				   //+1 Equipment
-//				   if (isShield){
-					   armorShield = baseShieldList[randGenerator.nextInt(baseShieldList.length)];
-					   armorShield.name = baseEnchantments[0].name + " " + armorShield.name;
-					   armorShield.totalEchantmentBonus =  baseEnchantments[0].bonus;
-					   armorShield.cost += Math.pow(armorShield.totalEchantmentBonus, 2) * 1000;
-//				   }
-				   
-//			   }
-//			   else {
-//				   //lesser minor specific
-//			   }
-//		   }
-//		   else {
-//			   //Greater
-//			   d = randGenerator.nextInt(100) + 1;
-//			   if (d <= 26) {
-//				   //+1
-//			   }
-//			   else if (d <= 53) {
-//				   //+2
-//			   }
-//			   else if (d <= 80) {
-//				   //+1 with +1 ability
-//			   }
-//			   else {
-//				   //greater minor
-//			   }
-//		   }
+				   addEnchantmentsToArmorShield(new Enchantment[] {baseEnchantments[0]});
+			   }
+			   else {
+				   //lesser minor specific
+				   if (isShield) {
+					   armorShield = lesserMinorSpecificMagicShields[(randGenerator.nextInt(lesserMinorSpecificMagicShields.length))];
+				   }
+				   else {
+					   armorShield = lesserMinorSpecificMagicArmor[(randGenerator.nextInt(lesserMinorSpecificMagicArmor.length))];
+				   }
+			   }
+		   }
+		   else {
+			   //Greater
+			   d = randGenerator.nextInt(100) + 1;
+			   if (d <= 26) {
+				   //+1
+				   addEnchantmentsToArmorShield(new Enchantment[] {baseEnchantments[0]});
+			   }
+			   else if (d <= 53) {
+				   //+2
+				   addEnchantmentsToArmorShield(new Enchantment[] {baseEnchantments[1]});
+			   }
+			   else if (d <= 80) {
+				   //+1 with +1 ability
+				   if (isShield) {
+					   addEnchantmentsToArmorShield(new Enchantment[] {shieldEnchantmentsLevel1[(randGenerator.nextInt(shieldEnchantmentsLevel1.length))], baseEnchantments[0]});
+				   }
+				   else {
+					   addEnchantmentsToArmorShield(new Enchantment[] {armorEnchantmentsLevel1[(randGenerator.nextInt(armorEnchantmentsLevel1.length))], baseEnchantments[0]});
+				   }
+			   }
+			   else {
+				   //greater minor
+				   armorShield = greaterMinorSpecificMagicArmor[(randGenerator.nextInt(greaterMinorSpecificMagicArmor.length))];
+			   }
+		   }
 	   }
 	   else if (type == Rarity.MEDIUM) {
 		   if (randGenerator.nextInt(2) == 0) {
@@ -332,7 +358,16 @@ public class ArmorsShields {
 			   //Greater
 		   }
 	   }
-	}	
+	}
+	
+	private void addEnchantmentsToArmorShield(Enchantment[] enchantments) {
+		for (int i = 0; i < enchantments.length; i++) {
+			armorShield.name = enchantments[i].name + " " + armorShield.name;
+			armorShield.totalEchantmentBonus +=  enchantments[i].bonus;
+			armorShield.cost += enchantments[i].additionalCost;
+		}
+		armorShield.cost += Math.pow(armorShield.totalEchantmentBonus, 2) * 1000;
+	}
 }
 
 
