@@ -1,5 +1,4 @@
 package shop;
-import java.util.Map;
 import java.util.Random;
 
 public class ArmorsShields {
@@ -26,6 +25,12 @@ public class ArmorsShields {
 			this.name = name;
 			this.bonus = bonus;
 			this.additionalCost = cost;
+		}
+		
+		Enchantment(String name, int bonus){
+			this.name = name;
+			this.bonus = bonus;
+			this.additionalCost = 0;
 		}
 	}
 		
@@ -56,31 +61,31 @@ public class ArmorsShields {
 	};
 	
 	private Enchantment[] baseEnchantments = new Enchantment[] {
-			new Enchantment("+1", 1, 0),
-			new Enchantment("+2", 2, 0),
-			new Enchantment("+3", 3, 0),
-			new Enchantment("+4", 4, 0),
-			new Enchantment("+5", 5, 0)
+			new Enchantment("+1", 1),
+			new Enchantment("+2", 2),
+			new Enchantment("+3", 3),
+			new Enchantment("+4", 4),
+			new Enchantment("+5", 5)
 	};
 	
 	private Enchantment[] armorEnchantmentsLevel1 = new Enchantment[] {
 		   new Enchantment("Benevolent", 1, 2000),
 		   new Enchantment("Poison-resistant", 1, 2250),
-		   new Enchantment("Balanced", 1, 0),
-		   new Enchantment("Bitter", 1, 0),
-		   new Enchantment("Bolstering", 1, 0),
-		   new Enchantment("Brawling", 1, 0),
-		   new Enchantment("Champion", 1, 0),
-		   new Enchantment("Dastard", 1, 0),
-		   new Enchantment("Deathless", 1, 0),
-		   new Enchantment("Defiant", 1, 0),
-		   new Enchantment("Fortification (light)", 1, 0),
-		   new Enchantment("Grinding", 1, 0),
-		   new Enchantment("Impervious", 1, 0),
-		   new Enchantment("Mirrored", 1, 0),
-		   new Enchantment("Spell Storing", 1, 0),
-		   new Enchantment("Stanching", 1, 0),
-		   new Enchantment("Warding", 1, 0),
+		   new Enchantment("Balanced", 1),
+		   new Enchantment("Bitter", 1),
+		   new Enchantment("Bolstering", 1),
+		   new Enchantment("Brawling", 1),
+		   new Enchantment("Champion", 1),
+		   new Enchantment("Dastard", 1),
+		   new Enchantment("Deathless", 1),
+		   new Enchantment("Defiant", 1),
+		   new Enchantment("Fortification (light)", 1),
+		   new Enchantment("Grinding", 1),
+		   new Enchantment("Impervious", 1),
+		   new Enchantment("Mirrored", 1),
+		   new Enchantment("Spell Storing", 1),
+		   new Enchantment("Stanching", 1),
+		   new Enchantment("Warding", 1),
 	};
    
 	private Enchantment[] armorEnchantmentsLevel2 = new Enchantment[] {
@@ -91,7 +96,7 @@ public class ArmorsShields {
 		   new Enchantment("Expeditious", 2, 4000),
 		   new Enchantment("Creeping", 2, 5000),
 		   new Enchantment("Rallying", 2, 5000),
-		   new Enchantment("Spell Resistance (13)", 2, 0)
+		   new Enchantment("Spell Resistance (13)", 2)
 	};
    
 	private Enchantment[] armorEnchantmentsLevel3 = new Enchantment[] {
@@ -100,12 +105,12 @@ public class ArmorsShields {
 		   new Enchantment("Radiant", 3, 7500),
 		   new Enchantment("Delving", 3, 10000),
 		   new Enchantment("Putrid", 3, 10000),
-		   new Enchantment("Fortification (moderate)", 3, 0),
-		   new Enchantment("Ghost Touch", 3, 0),
-		   new Enchantment("Invulnerability", 3, 0),
-		   new Enchantment("Spell Resistance (15)", 3, 0),
-		   new Enchantment("Titanic", 3, 0),
-		   new Enchantment("Wild", 3, 0)
+		   new Enchantment("Fortification (moderate)", 3),
+		   new Enchantment("Ghost Touch", 3),
+		   new Enchantment("Invulnerability", 3),
+		   new Enchantment("Spell Resistance (15)", 3),
+		   new Enchantment("Titanic", 3),
+		   new Enchantment("Wild", 3)
 	};
    
 	private Enchantment[] armorEnchantmentsLevel4 = new Enchantment[] {
@@ -114,7 +119,7 @@ public class ArmorsShields {
 		   new Enchantment("Improved Slick", 4, 15000),
 		   new Enchantment("Energy Resistance", 4, 18000),
 		   new Enchantment("Martyring", 4, 18000),
-		   new Enchantment("Spell Resistance (17)", 4, 0)
+		   new Enchantment("Spell Resistance (17)", 4)
 	};
  
 	private Enchantment[] armorEnchantmentsLevel5 = new Enchantment[] {
@@ -128,14 +133,12 @@ public class ArmorsShields {
 		   new Enchantment("Improved Energy Resistance", 5, 42000),
 		   new Enchantment("Etherealness", 5, 49000),
 		   new Enchantment("Greater Energy Resistance", 5, 66000),
-		   new Enchantment("Fortification (heavy)", 5, 0),
-		   new Enchantment("Spell Resistance (19)", 5, 0)
+		   new Enchantment("Fortification (heavy)", 5),
+		   new Enchantment("Spell Resistance (19)", 5)
 	};
    
 	private Equipment[] lesserMinorSpecificMagicArmor = new Equipment[] {
 		   new Equipment("Mithral Shirt", 1100)
-		   
-		   //Masterwork? special quality?
 	};
    
 	private Equipment[] greaterMinorSpecificMagicArmor = new Equipment[] {
@@ -193,49 +196,49 @@ public class ArmorsShields {
 
 	private Enchantment[] shieldEnchantmentsLevel1 = new Enchantment[] {
 		   new Enchantment("Poison-resistant", 1, 2250),
-		   new Enchantment("Arrow Catching", 1, 0),
-		   new Enchantment("Bashing", 1, 0),
-		   new Enchantment("Binding",1, 0),
-		   new Enchantment("Clangorous", 1, 0),
-		   new Enchantment("Defiant", 1, 0),
-		   new Enchantment("Fortification (light)", 1, 0),
-		   new Enchantment("Grinding", 1, 0),
-		   new Enchantment("Impervious", 1, 0),
-		   new Enchantment("Mirrored", 1, 0),
-		   new Enchantment("Ramming", 1, 0)
+		   new Enchantment("Arrow Catching", 1),
+		   new Enchantment("Bashing", 1),
+		   new Enchantment("Binding",1),
+		   new Enchantment("Clangorous", 1),
+		   new Enchantment("Defiant", 1),
+		   new Enchantment("Fortification (light)", 1),
+		   new Enchantment("Grinding", 1),
+		   new Enchantment("Impervious", 1),
+		   new Enchantment("Mirrored", 1),
+		   new Enchantment("Ramming", 1)
 	};
    
-	private Enchantment[] shieldEnchantmentLevel2 = new Enchantment[]{
+	private Enchantment[] shieldEnchantmentsLevel2 = new Enchantment[]{
 		   new Enchantment("Rallying", 2, 5000),
 		   new Enchantment("Wyrmsbreath", 2, 5000),
-		   new Enchantment("Animated", 2, 0),
-		   new Enchantment("Arrow Deflection", 2, 0),
-		   new Enchantment("Merging", 2, 0),
-		   new Enchantment("Spell Resistance (13)", 2, 0)
+		   new Enchantment("Animated", 2),
+		   new Enchantment("Arrow Deflection", 2),
+		   new Enchantment("Merging", 2),
+		   new Enchantment("Spell Resistance (13)", 2)
 	};
    
-	private Enchantment[] shieldEnchantmentLevel3 = new Enchantment[]{
+	private Enchantment[] shieldEnchantmentsLevel3 = new Enchantment[]{
 		   new Enchantment("Hosteling", 3, 7500),
 		   new Enchantment("Radiant", 3, 7500),
-		   new Enchantment("Fortification (moderate)", 3, 0),
-		   new Enchantment("Ghost Touch", 3, 0),
-		   new Enchantment("Spell Resistance (15)", 3, 0),
-		   new Enchantment("Wild", 3, 0)
+		   new Enchantment("Fortification (moderate)", 3),
+		   new Enchantment("Ghost Touch", 3),
+		   new Enchantment("Spell Resistance (15)", 3),
+		   new Enchantment("Wild", 3)
 	};
    
-	private Enchantment[] shieldEnchantmentLevel4 = new Enchantment[]{
+	private Enchantment[] shieldEnchantmentsLevel4 = new Enchantment[]{
 		   new Enchantment("Energy Resistance", 4, 18000),
-		   new Enchantment("Spell Resistance (17)", 4, 0)
+		   new Enchantment("Spell Resistance (17)", 4)
 	};
    
-	private Enchantment[] shieldEnchantmentLevel5 = new Enchantment[]{
+	private Enchantment[] shieldEnchantmentsLevel5 = new Enchantment[]{
 		   new Enchantment("Determination", 5, 30000),
 		   new Enchantment("Improved Energy Resistance", 5, 42000),
 		   new Enchantment("Undead Controlling", 5, 49000),
 		   new Enchantment("Greater Energy Resistance", 5, 66000),
-		   new Enchantment("Fortification (heavy)", 5, 0),
-		   new Enchantment("Reflecting", 5, 0),
-		   new Enchantment("Spell Resistance (19)", 5, 0)
+		   new Enchantment("Fortification (heavy)", 5),
+		   new Enchantment("Reflecting", 5),
+		   new Enchantment("Spell Resistance (19)", 5)
 	};
    
 	private Equipment[] lesserMinorSpecificMagicShields = new Equipment[] {
@@ -283,90 +286,232 @@ public class ArmorsShields {
 		   new Equipment("Elysian Shield", 52620)
 	};
    
+	private Random randGenerator;
+	
 	public ArmorsShields(Rarity type) {
 		
-	   Random randGenerator = new Random();
-	   int d;
+	   randGenerator = new Random();
 	   
-	   boolean isShield = false;
-	   if (randGenerator.nextInt(2) == 0) {
-		   isShield = true;
+	   int dPercent	= randGenerator.nextInt(100) + 1;
+	   boolean isLesser = (randGenerator.nextInt(2) == 0);
+	   
+	   boolean isShield = (randGenerator.nextInt(2) == 0);
+	   if (isShield) {
 		   armorShield = baseShieldList[randGenerator.nextInt(baseShieldList.length)];
 	   }
 	   else {
 		   armorShield = baseArmorList[randGenerator.nextInt(baseArmorList.length)];
 	   }
 	   
-		// add costs (bonus cost is (bonus * 1k)^2)
 	   if (type == Rarity.MINOR) {
-		   if (randGenerator.nextInt(2) == 0) {
+		   if (isLesser) {
 			   //Lesser
-			   d = randGenerator.nextInt(100) + 1;
-			   if (d <= 80) {
-				   //+1 Equipment
-				   addEnchantmentsToArmorShield(new Enchantment[] {baseEnchantments[0]});
-			   }
-			   else {
-				   //lesser minor specific
+			   if (dPercent <= 80) {
+				   addEnchantmentsToArmorShield(getEnchantments(1, 0, 0, isShield));
+			   } else {
 				   if (isShield) {
 					   armorShield = lesserMinorSpecificMagicShields[(randGenerator.nextInt(lesserMinorSpecificMagicShields.length))];
-				   }
-				   else {
+				   } else {
 					   armorShield = lesserMinorSpecificMagicArmor[(randGenerator.nextInt(lesserMinorSpecificMagicArmor.length))];
 				   }
 			   }
 		   }
 		   else {
 			   //Greater
-			   d = randGenerator.nextInt(100) + 1;
-			   if (d <= 26) {
-				   //+1
-				   addEnchantmentsToArmorShield(new Enchantment[] {baseEnchantments[0]});
-			   }
-			   else if (d <= 53) {
-				   //+2
-				   addEnchantmentsToArmorShield(new Enchantment[] {baseEnchantments[1]});
-			   }
-			   else if (d <= 80) {
-				   //+1 with +1 ability
+			   if (dPercent <= 26) {
+				   addEnchantmentsToArmorShield(getEnchantments(1, 0, 0, isShield));
+			   } else if (dPercent <= 53) {
+				   addEnchantmentsToArmorShield(getEnchantments(2, 0, 0, isShield));
+			   } else if (dPercent <= 80) {
+				   addEnchantmentsToArmorShield(getEnchantments(1, 1, 1, isShield));
+			   } else {
 				   if (isShield) {
-					   addEnchantmentsToArmorShield(new Enchantment[] {shieldEnchantmentsLevel1[(randGenerator.nextInt(shieldEnchantmentsLevel1.length))], baseEnchantments[0]});
+					   armorShield = greaterMinorSpecificMagicShields[(randGenerator.nextInt(greaterMinorSpecificMagicShields.length))];
+				   } else {
+					   armorShield = greaterMinorSpecificMagicArmor[(randGenerator.nextInt(greaterMinorSpecificMagicArmor.length))];
 				   }
-				   else {
-					   addEnchantmentsToArmorShield(new Enchantment[] {armorEnchantmentsLevel1[(randGenerator.nextInt(armorEnchantmentsLevel1.length))], baseEnchantments[0]});
-				   }
-			   }
-			   else {
-				   //greater minor
-				   armorShield = greaterMinorSpecificMagicArmor[(randGenerator.nextInt(greaterMinorSpecificMagicArmor.length))];
 			   }
 		   }
 	   }
 	   else if (type == Rarity.MEDIUM) {
-		   if (randGenerator.nextInt(2) == 0) {
+		   if (isLesser) {
 			   //Lesser 
+			   if (dPercent <= 10) {
+				   addEnchantmentsToArmorShield(getEnchantments(1, 0, 0, isShield));
+			   } else if (dPercent <= 20) {
+				   addEnchantmentsToArmorShield(getEnchantments(2, 0, 0, isShield));
+			   } else if (dPercent <= 32) {
+				   addEnchantmentsToArmorShield(getEnchantments(3, 0, 0, isShield));
+			   } else if (dPercent <= 44){
+				   addEnchantmentsToArmorShield(getEnchantments(1, 1, 1, isShield));
+			   } else if (dPercent <= 56) {
+				   addEnchantmentsToArmorShield(getEnchantments(1, 1, 2, isShield));
+			   } else if (dPercent <= 68) {
+				   addEnchantmentsToArmorShield(getEnchantments(1, 2, 1, isShield));
+			   } else if (dPercent <= 80) {
+				   addEnchantmentsToArmorShield(getEnchantments(2, 1, 1, isShield));
+			   } else {
+				   if (isShield) {
+					   armorShield = lesserMediumSpecificMagicShields[(randGenerator.nextInt(lesserMediumSpecificMagicShields.length))];
+				   } else {
+					   armorShield = lesserMediumSpecificMagicArmor[(randGenerator.nextInt(lesserMediumSpecificMagicArmor.length))];
+				   }
+			   }
 		   }
 		   else {
 			   //Greater
+			   if (dPercent <= 10) {
+				   addEnchantmentsToArmorShield(getEnchantments(2, 0, 0, isShield));
+			   } else if (dPercent <= 22) {
+				   addEnchantmentsToArmorShield(getEnchantments(3, 0, 0, isShield));
+			   } else if (dPercent <= 32) {
+				   addEnchantmentsToArmorShield(getEnchantments(1, 1, 1, isShield));
+			   } else if (dPercent <= 44){
+				   addEnchantmentsToArmorShield(getEnchantments(1, 2, 1, isShield));
+			   } else if (dPercent <= 56) {
+				   addEnchantmentsToArmorShield(getEnchantments(2, 1, 1, isShield));
+			   } else if (dPercent <= 68) {
+				   addEnchantmentsToArmorShield(getEnchantments(2, 2, 1, isShield));
+			   } else if (dPercent <= 80) {
+				   addEnchantmentsToArmorShield(getEnchantments(3, 1, 1, isShield));
+			   } else {
+				   if (isShield) {
+					   armorShield = greaterMediumSpecificMagicShields[(randGenerator.nextInt(greaterMediumSpecificMagicShields.length))];
+				   } else {
+					   armorShield = greaterMediumSpecificMagicArmor[(randGenerator.nextInt(greaterMediumSpecificMagicArmor.length))];
+				   }
+			   }
 		   }
 	   }
 	   else if (type == Rarity.MAJOR) {
-		   if (randGenerator.nextInt(2) == 0) {
-			   //Lesser 
+		   if (isLesser) {
+			   //Lesser
+			   if (dPercent <= 10) {
+				   addEnchantmentsToArmorShield(getEnchantments(3, 0, 0, isShield));
+			   } else if (dPercent <= 22) {
+				   addEnchantmentsToArmorShield(getEnchantments(4, 0, 0, isShield));
+			   } else if (dPercent <= 32) {
+				   addEnchantmentsToArmorShield(getEnchantments(1, 2, 1, isShield));
+			   } else if (dPercent <= 44){
+				   addEnchantmentsToArmorShield(getEnchantments(1, 3, 1, isShield));
+			   } else if (dPercent <= 56) {
+				   addEnchantmentsToArmorShield(getEnchantments(2, 2, 1, isShield));
+			   } else if (dPercent <= 68) {
+				   addEnchantmentsToArmorShield(getEnchantments(3, 1, 1, isShield));
+			   } else if (dPercent <= 80) {
+				   addEnchantmentsToArmorShield(getEnchantments(4, 1, 1, isShield));
+			   } else {
+				   if (isShield) {
+					   armorShield = lesserMajorSpecificMagicShields[(randGenerator.nextInt(lesserMajorSpecificMagicShields.length))];
+				   } else {
+					   armorShield = lesserMajorSpecificMagicArmor[(randGenerator.nextInt(lesserMajorSpecificMagicArmor.length))];
+				   }
+			   }
 		   }
 		   else {
 			   //Greater
+			   if (dPercent <= 10) {
+				   addEnchantmentsToArmorShield(getEnchantments(4, 0, 0, isShield));
+			   } else if (dPercent <= 20) {
+				   addEnchantmentsToArmorShield(getEnchantments(5, 0, 0, isShield));
+			   } else if (dPercent <= 30) {
+				   addEnchantmentsToArmorShield(getEnchantments(4, 1, 1, isShield));
+			   } else if (dPercent <= 38){
+				   addEnchantmentsToArmorShield(getEnchantments(4, 2, 1, isShield));
+			   } else if (dPercent <= 46) {
+				   addEnchantmentsToArmorShield(getEnchantments(4, 3, 1, isShield));
+			   } else if (dPercent <= 51) {
+				   addEnchantmentsToArmorShield(getEnchantments(4, 4, 1, isShield));
+			   } else if (dPercent <= 59) {
+				   addEnchantmentsToArmorShield(getEnchantments(5, 1, 1, isShield));
+			   } else if (dPercent <= 67) {
+				   addEnchantmentsToArmorShield(getEnchantments(5, 2, 1, isShield));
+			   } else if (dPercent <= 71) {
+				   addEnchantmentsToArmorShield(getEnchantments(5, 3, 1, isShield));
+			   } else if (dPercent <= 74) {
+				   addEnchantmentsToArmorShield(getEnchantments(5, 2, 2, isShield));
+			   } else if (dPercent <= 77) {
+				   addEnchantmentsToArmorShield(getEnchantments(5, 4, 1, isShield));
+			   } else if (dPercent <= 80) {
+				   addEnchantmentsToArmorShield(getEnchantments(5, 5, 1, isShield));
+			   } else {
+				   if (isShield) {
+					   armorShield = greaterMajorSpecificMagicShields[(randGenerator.nextInt(greaterMajorSpecificMagicShields.length))];
+				   } else {
+					   armorShield = greaterMajorSpecificMagicArmor[(randGenerator.nextInt(greaterMajorSpecificMagicArmor.length))];
+				   }
+			   }
 		   }
 	   }
 	}
 	
+	//Should only be called once for each item, otherwise price evaluation will be incorrect
+	//TODO:Make more error proof
 	private void addEnchantmentsToArmorShield(Enchantment[] enchantments) {
 		for (int i = 0; i < enchantments.length; i++) {
 			armorShield.name = enchantments[i].name + " " + armorShield.name;
 			armorShield.totalEchantmentBonus +=  enchantments[i].bonus;
 			armorShield.cost += enchantments[i].additionalCost;
 		}
+		
+		// add costs (bonus cost is (bonus * 1k)^2)
 		armorShield.cost += Math.pow(armorShield.totalEchantmentBonus, 2) * 1000;
+	}
+	
+	private Enchantment[] getEnchantments(int baseEnchantmentBonus, int abilityEnchantmentStrength, int numAbilities, boolean isShield) {
+		Enchantment[] enchantments = new Enchantment[numAbilities + 1];
+		
+		for (int i = 0; i < numAbilities; i++) {
+			if (isShield) {
+				switch (abilityEnchantmentStrength) {
+				case 1:
+					enchantments[i] = shieldEnchantmentsLevel1[randGenerator.nextInt(shieldEnchantmentsLevel1.length)];
+					break;
+				case 2:
+					enchantments[i] = shieldEnchantmentsLevel2[randGenerator.nextInt(shieldEnchantmentsLevel2.length)];
+					break;
+				case 3:
+					enchantments[i] = shieldEnchantmentsLevel3[randGenerator.nextInt(shieldEnchantmentsLevel3.length)];
+					break;
+				case 4:
+					enchantments[i] = shieldEnchantmentsLevel4[randGenerator.nextInt(shieldEnchantmentsLevel4.length)];
+					break;
+				case 5:
+					enchantments[i] = shieldEnchantmentsLevel5[randGenerator.nextInt(shieldEnchantmentsLevel5.length)];
+					break;
+				default:
+					break;
+				}
+			} else {
+				switch (abilityEnchantmentStrength) {
+				case 1:
+					enchantments[i] = armorEnchantmentsLevel1[randGenerator.nextInt(armorEnchantmentsLevel1.length)];
+					break;
+				case 2:
+					enchantments[i] = armorEnchantmentsLevel2[randGenerator.nextInt(armorEnchantmentsLevel2.length)];
+					break;
+				case 3:
+					enchantments[i] = armorEnchantmentsLevel3[randGenerator.nextInt(armorEnchantmentsLevel3.length)];
+					break;
+				case 4:
+					enchantments[i] = armorEnchantmentsLevel4[randGenerator.nextInt(armorEnchantmentsLevel4.length)];
+					break;
+				case 5:
+					enchantments[i] = armorEnchantmentsLevel5[randGenerator.nextInt(armorEnchantmentsLevel5.length)];
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		
+		enchantments[numAbilities] = getBaseEnchantment(baseEnchantmentBonus);
+		
+		return enchantments;
+	}
+	
+	private Enchantment getBaseEnchantment(int enchantmentValue) {
+		return baseEnchantments[enchantmentValue - 1];
 	}
 }
 
