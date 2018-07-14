@@ -100,6 +100,18 @@ public class ShopGenerator {
 			System.out.println("Cost: " + test.armorShield.cost);
 		}
 		
+		for (int i = 0; i < numMediumItems; i++) {
+			ArmorsShields test = new ArmorsShields(Rarity.MEDIUM);
+			System.out.println("Name: " + test.armorShield.name);
+			System.out.println("Cost: " + test.armorShield.cost);
+		}
+		
+		for (int i = 0; i < numMajorItems; i++) {
+			ArmorsShields test = new ArmorsShields(Rarity.MAJOR);
+			System.out.println("Name: " + test.armorShield.name);
+			System.out.println("Cost: " + test.armorShield.cost);
+		}
+		
 		// Import NPC from NPC Creator (TBD)
 		
 	}
